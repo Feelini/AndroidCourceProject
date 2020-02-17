@@ -1,15 +1,18 @@
 package com.soldatov.mycookbook.repo.database;
 
-import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "ingredient_entity")
-public class IngredientEntity {
+public class BaseIngredientList {
 
     @PrimaryKey(autoGenerate = true)
     private long id;
     private String name;
     private String imageUrl;
+
+    public BaseIngredientList(String name, String imageUrl) {
+        this.name = name;
+        this.imageUrl = imageUrl;
+    }
 
     public long getId() {
         return id;

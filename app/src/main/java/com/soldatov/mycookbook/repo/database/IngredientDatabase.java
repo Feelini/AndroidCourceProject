@@ -1,22 +1,23 @@
 package com.soldatov.mycookbook.repo.database;
 
-import android.app.Application;
+import android.content.Context;
 
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {IngredientEntity.class}, version = 1, exportSchema = false)
+@Database(entities = {IngredientListEntity.class, IngredientListUserEntity.class}, version = 1, exportSchema = false)
 public abstract class IngredientDatabase extends RoomDatabase {
     private static volatile IngredientDatabase instance;
 
-    public static IngredientDatabase getInstance(final Application application){
+    public static IngredientDatabase getInstance(final Context context){
         if (instance == null){
             synchronized (IngredientDatabase.class){
                 if (instance == null){
-                    instance = Room.databaseBuilder(application.getApplicationContext(),
+                    instance = Room.databaseBuilder(context.getApplicationContext(),
                             IngredientDatabase.class,
                             "db_ingredient.db")
+                            .createFromAsset("db_ingredient.db")
                             .build();
                 }
             }
@@ -24,4 +25,6 @@ public abstract class IngredientDatabase extends RoomDatabase {
 
         return instance;
     }
+
+    public abstract IngredientDao ingredientDao();
 }

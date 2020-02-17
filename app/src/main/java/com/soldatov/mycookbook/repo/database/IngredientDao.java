@@ -10,15 +10,16 @@ import java.util.List;
 
 @Dao
 public interface IngredientDao {
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(IngredientEntity ingredientEntity);
+    void insert(IngredientListUserEntity ingredientListUserEntityEntity);
 
-    @Query("SELECT * FROM ingredient_entity")
-    List<IngredientEntity> getAll();
+    @Query("SELECT * FROM ingredient_list_entity")
+    List<IngredientListEntity> getAllIngredients();
 
-    @Query("SELECT * FROM ingredient_entity WHERE id = :id")
-    IngredientEntity getEntity(long id);
+    @Query("SELECT * FROM ingredient_list_user_entity")
+    List<IngredientListUserEntity> getAllUserIngredients();
 
     @Delete
-    void deleteEntity(IngredientEntity ingredientEntity);
+    void deleteEntity(IngredientListUserEntity ingredientListUserEntity);
 }

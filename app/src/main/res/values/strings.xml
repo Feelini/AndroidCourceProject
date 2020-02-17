@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">My Cookbook</string>
+    <string name="default_search">Search ingredients</string>
+    <string name="add_ingredients">Add ingredients</string>
+    <string name="empty_list_ingredients">Please add your ingredients</string>
 </resources>
