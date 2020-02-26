@@ -8,6 +8,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.soldatov.mycookbook.ingredient.IngredientFragmentViewModel;
 import com.soldatov.mycookbook.ingredient_user.IngredientUserFragmentViewModel;
+import com.soldatov.mycookbook.recipe_text.RecipeTextViewModel;
+import com.soldatov.mycookbook.recipes.RecipesFragmentViewModel;
 import com.soldatov.mycookbook.repo.RepositoryImpl;
 
 public class ViewModelFactory implements ViewModelProvider.Factory {
@@ -26,6 +28,12 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
         }
         if (modelClass.isAssignableFrom(IngredientFragmentViewModel.class)) {
             return (T) new IngredientFragmentViewModel(application, new RepositoryImpl(application));
+        }
+        if (modelClass.isAssignableFrom(RecipesFragmentViewModel.class)) {
+            return (T) new RecipesFragmentViewModel(application, new RepositoryImpl(application));
+        }
+        if (modelClass.isAssignableFrom(RecipeTextViewModel.class)) {
+            return (T) new RecipeTextViewModel(application, new RepositoryImpl(application));
         }
         return null;
     }

@@ -8,6 +8,7 @@
     android:clickable="true">
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/recipeToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
@@ -25,42 +26,15 @@
                 android:textColor="@android:color/black"
                 android:textSize="24sp"/>
 
-            <ImageView
-                android:id="@+id/addNewIngredient"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_gravity="end"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_add_circle"
-                android:contentDescription="@string/add_ingredients" />
-
         </FrameLayout>
 
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/viewIngredientUserList"
+        android:id="@+id/viewRecipesList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_marginTop="55dp" />
-
-    <TextView
-        android:id="@+id/viewEmptyUserList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/empty_list_ingredients"
-        android:textSize="20sp" />
-
-    <Button
-        android:id="@+id/searchRecipes"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="@string/search_recipes"
-        android:layout_margin="16dp"
-        android:layout_gravity="bottom"/>
 
 </FrameLayout>

@@ -16,18 +16,38 @@ public class IngredientUserFragmentViewModel extends AndroidViewModel {
 
     private Repository repository;
     private MutableLiveData<List<IngredientListUserEntity>> liveData = new MutableLiveData<>();
+    private MutableLiveData<Long> newIngredientId = new MutableLiveData<>();
 
     public IngredientUserFragmentViewModel(@NonNull Application application, Repository repository) {
         super(application);
         this.repository = repository;
     }
 
-    public void fetchIngredients(){
+    public void fetchIngredients() {
         repository.getUserIngredients()
                 .thenAccept(ingredientListUserEntities -> liveData.postValue(ingredientListUserEntities));
     }
 
-    public LiveData<List<IngredientListUserEntity>> getLiveData(){
+    public void deleteIngredient(long ingredientId) {
+        repository.deleteUserIngredient(ingredientId);
+    }
+
+    public void addUserIngredient(IngredientListUserEntity ingredientListUserEntity) {
+        repository.addUserIngredient(ingredientListUserEntity)
+                .thenAccept(aLong -> newIngredientId.postValue(aLong));
+    }
+
+    public void addUserIngredients(List<IngredientListUserEntity> checkedIngredientListUserEntity) {
+        for (IngredientListUserEntity ingredient : checkedIngredientListUserEntity) {
+            repository.addUserIngredient(ingredient);
+        }
+    }
+
+    public LiveData<List<IngredientListUserEntity>> getLiveData() {
         return liveData;
+    }
+
+    public LiveData<Long> getNewIngredientId(){
+        return newIngredientId;
     }
 }

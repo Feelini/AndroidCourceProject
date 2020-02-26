@@ -12,6 +12,7 @@
     android:background="@drawable/rounded_corners_for_item">
 
     <CheckBox
+        android:id="@+id/checkIngredient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -27,9 +28,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textSize="40sp"
+        android:textSize="24sp"
         android:textColor="@android:color/black"
         android:maxLines="2"
+        android:layout_gravity="center"
         android:layout_marginStart="8dp"
         tools:text="Name of ingredient name name"/>
 

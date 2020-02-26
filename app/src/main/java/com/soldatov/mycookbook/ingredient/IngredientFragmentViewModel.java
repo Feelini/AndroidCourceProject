@@ -9,9 +9,9 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.soldatov.mycookbook.repo.Repository;
 import com.soldatov.mycookbook.repo.database.IngredientListEntity;
+import com.soldatov.mycookbook.repo.database.IngredientListUserEntity;
 
 import java.util.List;
-import java.util.concurrent.Executors;
 
 public class IngredientFragmentViewModel extends AndroidViewModel {
 
@@ -25,7 +25,13 @@ public class IngredientFragmentViewModel extends AndroidViewModel {
 
     public void fetchIngredients(){
         repository.getAllIngredients()
-                .thenAcceptAsync(ingredientListEntities -> liveData.postValue(ingredientListEntities), Executors.newSingleThreadExecutor());
+                .thenAccept(ingredientListEntities -> liveData.postValue(ingredientListEntities));
+    }
+
+    public void addUserIngredients(List<IngredientListUserEntity> checkedIngredients){
+        for (IngredientListUserEntity ingredient: checkedIngredients){
+            repository.addUserIngredient(ingredient);
+        }
     }
 
     public LiveData<List<IngredientListEntity>> getLiveData(){

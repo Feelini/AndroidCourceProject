@@ -6,7 +6,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {IngredientListEntity.class, IngredientListUserEntity.class}, version = 1, exportSchema = false)
+@Database(entities = {IngredientListEntity.class, IngredientListUserEntity.class}, version = 2, exportSchema = false)
 public abstract class IngredientDatabase extends RoomDatabase {
     private static volatile IngredientDatabase instance;
 
