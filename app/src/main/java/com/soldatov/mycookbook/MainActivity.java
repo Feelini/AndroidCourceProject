@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.soldatov.mycookbook.ingredient.IngredientFragment;
 import com.soldatov.mycookbook.ingredient_user.IngredientUserFragment;
 import com.soldatov.mycookbook.recipe_text.RecipeTextFragment;
+import com.soldatov.mycookbook.recipes.Recipe;
 import com.soldatov.mycookbook.recipes.RecipeText;
 import com.soldatov.mycookbook.recipes.RecipesFragment;
 import com.soldatov.mycookbook.repo.database.IngredientListUserEntity;
@@ -44,9 +45,9 @@ public class MainActivity extends AppCompatActivity implements IngredientUserFra
                 .commit();
     }
 
-    private void addRecipeTextFragment(long id){
+    private void addRecipeTextFragment(Recipe recipe){
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragmentContainer, RecipeTextFragment.getInstance(id),
+                .replace(R.id.fragmentContainer, RecipeTextFragment.getInstance(recipe),
                         RecipeTextFragment.class.getName())
                 .addToBackStack(null)
                 .commit();
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements IngredientUserFra
     }
 
     @Override
-    public void onShowRecipeTextClick(long id) {
-        addRecipeTextFragment(id);
+    public void onShowRecipeTextClick(Recipe recipe) {
+        addRecipeTextFragment(recipe);
     }
 }

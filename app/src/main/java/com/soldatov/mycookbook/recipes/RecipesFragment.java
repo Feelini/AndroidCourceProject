@@ -60,7 +60,7 @@ public class RecipesFragment extends Fragment {
     }
 
     public interface OnShowRecipeTextClickListener{
-        void onShowRecipeTextClick(long id);
+        void onShowRecipeTextClick(Recipe recipe);
     }
 
     @Override
@@ -181,14 +181,9 @@ public class RecipesFragment extends Fragment {
             }
 
             public void bindData(Recipe recipe) {
-                List<List<IngredientListEntity>> ingredientsList = new ArrayList<>();
-                ingredientsList.add(recipe.getMissedIngredients());
-                ingredientsList.add(recipe.getUsedIngredients());
-                ingredientsList.add(recipe.getUnusedIngredients());
                 Picasso.get().load(recipe.getImageUrl()).into(recipeImage);
                 recipeName.setText(recipe.getName());
-                ingredients.setAdapter(new RecipesExpandableListAdapter(getContext(), groupHeader, ingredientsList));
-                itemView.setOnClickListener(v -> onShowRecipeTextClickListener.onShowRecipeTextClick(recipe.getId()));
+                itemView.setOnClickListener(v -> onShowRecipeTextClickListener.onShowRecipeTextClick(recipe));
             }
         }
     }

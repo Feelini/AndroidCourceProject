@@ -10,9 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.soldatov.mycookbook.R;
+import com.soldatov.mycookbook.recipe_text.expandable.RecipeIngredients;
+import com.soldatov.mycookbook.recipe_text.expandable.RecipeIngredientsAdapter;
+import com.soldatov.mycookbook.recipes.Recipe;
 import com.soldatov.mycookbook.utils.ViewModelFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,14 +30,17 @@ import butterknife.Unbinder;
 public class RecipeTextFragment extends Fragment {
     @BindView(R.id.recipeText)
     TextView viewRecipeText;
+    @BindView(R.id.ingredientsForRecipe)
+    RecyclerView ingredientsForRecipe;
 
     private Unbinder unbinder;
     private RecipeTextViewModel viewModel;
     private static RecipeTextFragment instance;
-    private static long recipeId;
+    private static Recipe recipeMy;
+    private RecipeIngredientsAdapter adapter;
 
-    public static RecipeTextFragment getInstance(long id) {
-        recipeId = id;
+    public static RecipeTextFragment getInstance(Recipe recipe) {
+        recipeMy = recipe;
         if (instance == null) {
             instance = new RecipeTextFragment();
         }
@@ -60,7 +72,8 @@ public class RecipeTextFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         unbinder = ButterKnife.bind(this, view);
 
-        viewModel.fetchRecipeText(recipeId);
+        viewModel.fetchRecipeText(recipeMy.getId());
+        showIngredientsList();
     }
 
     @Override
@@ -69,6 +82,32 @@ public class RecipeTextFragment extends Fragment {
         if (unbinder != null) {
             unbinder.unbind();
         }
+    }
+
+    private void showIngredientsList(){
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+//        RecyclerView.ItemAnimator animator = ingredientsForRecipe.getItemAnimator();
+//        if (animator instanceof DefaultItemAnimator) {
+//            ((DefaultItemAnimator) animator).setSupportsChangeAnimations(false);
+//        }
+
+        adapter = new RecipeIngredientsAdapter(getRecipeIngredientsList());
+        ingredientsForRecipe.setLayoutManager(layoutManager);
+        ingredientsForRecipe.setAdapter(adapter);
+    }
+
+    private List<RecipeIngredients> getRecipeIngredientsList(){
+        List<RecipeIngredients> recipeIngredientsList = new ArrayList<>();
+
+        RecipeIngredients recipeMissedIngredients = new RecipeIngredients("Missed ingredients", recipeMy.getMissedIngredients());
+        RecipeIngredients recipeUsedIngredients = new RecipeIngredients("Used ingredients", recipeMy.getUsedIngredients());
+        RecipeIngredients recipeUnusedIngredients = new RecipeIngredients("Unused ingredients", recipeMy.getUnusedIngredients());
+
+        recipeIngredientsList.add(recipeMissedIngredients);
+        recipeIngredientsList.add(recipeUsedIngredients);
+        recipeIngredientsList.add(recipeUnusedIngredients);
+
+        return recipeIngredientsList;
     }
 
 }
