@@ -42,7 +42,7 @@ public class RecipesFragment extends Fragment {
     Toolbar recipeToolbar;
     @BindView(R.id.viewRecipesList)
     RecyclerView viewRecipesList;
-    @BindView(R.id.progressRecipeText)
+    @BindView(R.id.progressBar)
     ProgressBar progressBar;
 
     private RecipesFragmentViewModel viewModel;

@@ -8,7 +8,6 @@ import com.soldatov.mycookbook.ingredient.IngredientFragment;
 import com.soldatov.mycookbook.ingredient_user.IngredientUserFragment;
 import com.soldatov.mycookbook.recipe_text.RecipeTextFragment;
 import com.soldatov.mycookbook.recipes.Recipe;
-import com.soldatov.mycookbook.recipes.RecipeText;
 import com.soldatov.mycookbook.recipes.RecipesFragment;
 import com.soldatov.mycookbook.repo.database.IngredientListUserEntity;
 import com.soldatov.mycookbook.utils.OnCloseFragmentClickListener;

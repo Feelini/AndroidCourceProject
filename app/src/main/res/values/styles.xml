@@ -7,6 +7,23 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
+        <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
+    </style>
+
+    <style name="RecipeText">
+        <item name="android:background">@drawable/recipe_background</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+
+    <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/advent_pro_medium</item>
+    </style>
+
+    <style name="RobotoButtonStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/advent_pro_medium</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:gravity">center</item>
     </style>
 
 </resources>

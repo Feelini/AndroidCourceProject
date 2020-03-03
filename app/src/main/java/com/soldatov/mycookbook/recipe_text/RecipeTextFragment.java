@@ -33,7 +33,7 @@ public class RecipeTextFragment extends Fragment {
     TextView viewRecipeText;
     @BindView(R.id.ingredientsForRecipe)
     RecyclerView ingredientsForRecipe;
-    @BindView(R.id.progressRecipeText)
+    @BindView(R.id.progressBar)
     ProgressBar progressBar;
 
     private Unbinder unbinder;
