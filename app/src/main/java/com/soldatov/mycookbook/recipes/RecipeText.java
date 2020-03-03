@@ -1,9 +1,6 @@
 package com.soldatov.mycookbook.recipes;
 
-import com.google.gson.annotations.SerializedName;
-
 public class RecipeText {
-    @SerializedName("instructions")
     private String instructions;
 
     public RecipeText(String instructions) {

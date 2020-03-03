@@ -37,12 +37,6 @@ public class IngredientUserFragmentViewModel extends AndroidViewModel {
                 .thenAccept(aLong -> newIngredientId.postValue(aLong));
     }
 
-    public void addUserIngredients(List<IngredientListUserEntity> checkedIngredientListUserEntity) {
-        for (IngredientListUserEntity ingredient : checkedIngredientListUserEntity) {
-            repository.addUserIngredient(ingredient);
-        }
-    }
-
     public LiveData<List<IngredientListUserEntity>> getLiveData() {
         return liveData;
     }

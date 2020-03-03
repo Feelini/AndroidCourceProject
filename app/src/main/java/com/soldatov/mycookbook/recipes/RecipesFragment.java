@@ -43,7 +43,7 @@ public class RecipesFragment extends Fragment {
     @BindView(R.id.viewRecipesList)
     RecyclerView viewRecipesList;
     @BindView(R.id.progressRecipeText)
-    ProgressBar progressRecipeText;
+    ProgressBar progressBar;
 
     private RecipesFragmentViewModel viewModel;
     private Unbinder unbinder;
@@ -117,7 +117,7 @@ public class RecipesFragment extends Fragment {
         recipeToolbar.setNavigationOnClickListener(v -> onCloseFragmentClickListener.onCloseFragmentClick());
 
         viewModel.fetchRecipes(createIngredientsString());
-        progressRecipeText.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -134,13 +134,14 @@ public class RecipesFragment extends Fragment {
             ingredientsStringBuilder.append(ingredient.getName())
                     .append(",+");
         }
-        ingredientsStringBuilder.setLength(ingredientsStringBuilder.length() - 2);
-        String ingredientsString = Pattern.compile(" ").matcher(ingredientsStringBuilder).replaceAll("%20");
-        return ingredientsString;
+        if (ingredientsStringBuilder.length() != 0){
+            ingredientsStringBuilder.setLength(ingredientsStringBuilder.length() - 2);
+        }
+        return Pattern.compile(" ").matcher(ingredientsStringBuilder).replaceAll("%20");
     }
 
     private void showRecipesList(List<Recipe> recipes) {
-        progressRecipeText.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
         adapter = new RecipesAdapter(recipes);
         viewRecipesList.setAdapter(adapter);
         viewRecipesList.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
@@ -177,8 +178,6 @@ public class RecipesFragment extends Fragment {
             ImageView recipeImage;
             @BindView(R.id.recipeName)
             TextView recipeName;
-            @BindView(R.id.ingredients)
-            ExpandableListView ingredients;
 
             public RecipesViewHolder(@NonNull View itemView) {
                 super(itemView);

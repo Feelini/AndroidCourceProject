@@ -7,21 +7,15 @@ import java.util.List;
 
 public class Recipe {
 
-    @SerializedName("id")
     private long id;
     @SerializedName("title")
     private String name;
     @SerializedName("image")
     private String imageUrl;
-    @SerializedName("missedIngredients")
     private List<IngredientListEntity> missedIngredients;
-    @SerializedName("usedIngredients")
     private List<IngredientListEntity> usedIngredients;
-    @SerializedName("unusedIngredients")
     private List<IngredientListEntity> unusedIngredients;
-    @SerializedName("usedIngredientCount")
     private String usedIngredientCount;
-    @SerializedName("missedIngredientCount")
     private String missedIngredientCount;
 
     public Recipe(long id, String name, String imageUrl, List<IngredientListEntity> missedIngredients, List<IngredientListEntity> usedIngredients, List<IngredientListEntity> unusedIngredients, String usedIngredientCount, String missedIngredientCount) {

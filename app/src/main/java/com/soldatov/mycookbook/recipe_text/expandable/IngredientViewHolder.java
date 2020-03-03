@@ -21,6 +21,8 @@ public class IngredientViewHolder extends ChildViewHolder {
     }
 
     public void bindView(IngredientListEntity ingredientListEntity){
-        ingredient.setText(ingredientListEntity.getName());
+        String name = ingredientListEntity.getName();
+        name = name.substring(0, 1).toUpperCase() + name.substring(1);
+        ingredient.setText(name);
     }
 }

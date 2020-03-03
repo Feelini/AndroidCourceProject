@@ -34,7 +34,7 @@ public class RecipeTextFragment extends Fragment {
     @BindView(R.id.ingredientsForRecipe)
     RecyclerView ingredientsForRecipe;
     @BindView(R.id.progressRecipeText)
-    ProgressBar progressRecipeText;
+    ProgressBar progressBar;
 
     private Unbinder unbinder;
     private RecipeTextViewModel viewModel;
@@ -63,7 +63,7 @@ public class RecipeTextFragment extends Fragment {
         viewModel.getLiveData().observe(
                 getViewLifecycleOwner(), recipeText -> {
                     if (recipeText != null) {
-                        progressRecipeText.setVisibility(View.INVISIBLE);
+                        progressBar.setVisibility(View.INVISIBLE);
                         viewRecipeText.setText(recipeText.getInstructions());
                     }
                 }
@@ -77,8 +77,8 @@ public class RecipeTextFragment extends Fragment {
         unbinder = ButterKnife.bind(this, view);
 
         viewModel.fetchRecipeText(recipeMy.getId());
+        progressBar.setVisibility(View.VISIBLE);
         showIngredientsList();
-        progressRecipeText.setVisibility(View.VISIBLE);
     }
 
     @Override

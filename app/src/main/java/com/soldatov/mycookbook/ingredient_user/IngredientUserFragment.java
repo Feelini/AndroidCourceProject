@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -116,7 +117,12 @@ public class IngredientUserFragment extends Fragment {
             if ((onSearchRecipesClickListener != null)) {
                 adapter = (IngredientsUserAdapter) ingredientUserList.getAdapter();
                 if (adapter != null) {
-                    onSearchRecipesClickListener.onSearchRecipesClick(adapter.getCheckedIngredients());
+                    List<IngredientListUserEntity> ingredientListUserEntities = adapter.getCheckedIngredients();
+                    if (ingredientListUserEntities.size() != 0) {
+                        onSearchRecipesClickListener.onSearchRecipesClick(ingredientListUserEntities);
+                    } else {
+                        Toast.makeText(getContext(), "Select at least one item", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -167,7 +173,9 @@ public class IngredientUserFragment extends Fragment {
                 deletedIngredient = adapter.removeIngredientByPosition(position);
                 deletedPosition = position;
                 adapter.notifyItemRemoved(position);
-                Snackbar.make(ingredientUserList, deletedIngredient.getName(), Snackbar.LENGTH_LONG)
+                String name = deletedIngredient.getName();
+                name = name.substring(0, 1).toUpperCase() + name.substring(1);
+                Snackbar.make(ingredientUserList, name, Snackbar.LENGTH_LONG)
                         .setAction("Undo", v -> viewModel.addUserIngredient(deletedIngredient)).show();
                 checkEmptyList(adapter.getAllIngredientsUser());
             }

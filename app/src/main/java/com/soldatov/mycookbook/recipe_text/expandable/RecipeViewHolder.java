@@ -1,5 +1,6 @@
 package com.soldatov.mycookbook.recipe_text.expandable;
 
+import android.content.Context;
 import android.view.View;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import com.soldatov.mycookbook.R;
 import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder;
 
+import androidx.core.content.ContextCompat;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -25,8 +27,11 @@ public class RecipeViewHolder extends GroupViewHolder {
         ButterKnife.bind(this, itemView);
     }
 
-    public void setGroupTitle(String title){
+    public void setGroupTitle(String title, int itemCount, Context context){
         groupTitle.setText(title);
+        if (itemCount == 0){
+            groupTitle.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
+        }
     }
 
     @Override
