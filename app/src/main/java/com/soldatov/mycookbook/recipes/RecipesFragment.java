@@ -10,6 +10,7 @@ import android.widget.ExpandableListView;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -41,6 +42,8 @@ public class RecipesFragment extends Fragment {
     Toolbar recipeToolbar;
     @BindView(R.id.viewRecipesList)
     RecyclerView viewRecipesList;
+    @BindView(R.id.progressRecipeText)
+    ProgressBar progressRecipeText;
 
     private RecipesFragmentViewModel viewModel;
     private Unbinder unbinder;
@@ -114,6 +117,7 @@ public class RecipesFragment extends Fragment {
         recipeToolbar.setNavigationOnClickListener(v -> onCloseFragmentClickListener.onCloseFragmentClick());
 
         viewModel.fetchRecipes(createIngredientsString());
+        progressRecipeText.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -136,6 +140,7 @@ public class RecipesFragment extends Fragment {
     }
 
     private void showRecipesList(List<Recipe> recipes) {
+        progressRecipeText.setVisibility(View.INVISIBLE);
         adapter = new RecipesAdapter(recipes);
         viewRecipesList.setAdapter(adapter);
         viewRecipesList.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));

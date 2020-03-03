@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,6 +33,8 @@ public class RecipeTextFragment extends Fragment {
     TextView viewRecipeText;
     @BindView(R.id.ingredientsForRecipe)
     RecyclerView ingredientsForRecipe;
+    @BindView(R.id.progressRecipeText)
+    ProgressBar progressRecipeText;
 
     private Unbinder unbinder;
     private RecipeTextViewModel viewModel;
@@ -60,6 +63,7 @@ public class RecipeTextFragment extends Fragment {
         viewModel.getLiveData().observe(
                 getViewLifecycleOwner(), recipeText -> {
                     if (recipeText != null) {
+                        progressRecipeText.setVisibility(View.INVISIBLE);
                         viewRecipeText.setText(recipeText.getInstructions());
                     }
                 }
@@ -74,6 +78,7 @@ public class RecipeTextFragment extends Fragment {
 
         viewModel.fetchRecipeText(recipeMy.getId());
         showIngredientsList();
+        progressRecipeText.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -86,10 +91,10 @@ public class RecipeTextFragment extends Fragment {
 
     private void showIngredientsList(){
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-//        RecyclerView.ItemAnimator animator = ingredientsForRecipe.getItemAnimator();
-//        if (animator instanceof DefaultItemAnimator) {
-//            ((DefaultItemAnimator) animator).setSupportsChangeAnimations(false);
-//        }
+        RecyclerView.ItemAnimator animator = ingredientsForRecipe.getItemAnimator();
+        if (animator instanceof DefaultItemAnimator) {
+            ((DefaultItemAnimator) animator).setSupportsChangeAnimations(false);
+        }
 
         adapter = new RecipeIngredientsAdapter(getRecipeIngredientsList());
         ingredientsForRecipe.setLayoutManager(layoutManager);
